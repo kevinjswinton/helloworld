@@ -1,3 +1,5 @@
+# comments
+
 ---
 
 name: Tag
@@ -10,26 +12,28 @@ on:
 jobs:
 
   push_to_registry:
-    name: Push Docker image to Docker Hub
-    runs-on: ubuntu-latest
+
+    name:        Push Docker image to Docker Hub
+    runs-on:     ubuntu-latest
     permissions: write-all
+
     steps:
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Fetch tags
-      run: git fetch --tags --force
+      - name: Fetch tags
+        run: git fetch --tags --force
 
-    - name: Display the Tag name
-      run: echo "${{ github.ref_name }}"
+      - name: Display the Tag name
+        run: echo "${{ github.ref_name }}"
 
-    - name: Extract the Commit Hash that the Tag points to
-      id: hash
-      run: |
-        echo "COMMIT_HASH=$(git rev-list -n 1 ${{ github.ref_name }} | cut -c1-7)" >> $GITHUB_OUTPUT
+      - name: Extract the Commit Hash that the Tag points to
+        id: hash
+        run: |
+          echo "COMMIT_HASH=$(git rev-list -n 1 ${{ github.ref_name }} | cut -c1-7)" >> $GITHUB_OUTPUT
 
-    - name: Create lightweight tag that points "production" at the Commit Hash
-      run: |
-        git tag -f production ${{ steps.hash.outputs.COMMIT_HASH }}
-        git push -f origin production
+      - name: Create lightweight tag that points "production" at the Commit Hash
+        run: |
+          git tag -f production ${{ steps.hash.outputs.COMMIT_HASH }}
+          git push -f origin production
