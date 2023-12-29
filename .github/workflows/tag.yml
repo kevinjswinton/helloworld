@@ -19,21 +19,23 @@ jobs:
 
     steps:
 
-      - name: Checkout repository
+      - name: checkout_repository
+        id:   checkout_repository
         uses: actions/checkout@v4
 
-      - name: Fetch tags
-        run: git fetch --tags --force
+      - name: fetch_tags
+        id:   fetch_tags
+        run:  git fetch --tags --force
 
-      - name: Display the Tag name
-        run: echo "${{ github.ref_name }}"
+      - name: display_tag_name
+        id:   display_tag_name
+        run:  echo "${{ github.ref_name }}"
 
-      - name: Extract the Commit Hash that the Tag points to
-        id: hash
-        run: |
-          echo "COMMIT_HASH=$(git rev-list -n 1 ${{ github.ref_name }} | cut -c1-7)" >> $GITHUB_OUTPUT
+      - name: find_commit_hash
+        id:   find_commit_hash
+        run:  echo "COMMIT_HASH=$(git rev-list -n 1 ${{ github.ref_name }} | cut -c1-7)" >> $GITHUB_OUTPUT
 
-      - name: Create lightweight tag that points "production" at the Commit Hash
-        run: |
-          git tag -f production ${{ steps.hash.outputs.COMMIT_HASH }}
-          git push -f origin production
+      - name: set_tag
+        id:   set_tag
+        run:  git tag  -f        production ${{ steps.find_commit_hash.outputs.COMMIT_HASH }}
+              git push -f origin production
