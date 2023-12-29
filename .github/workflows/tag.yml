@@ -31,4 +31,5 @@ jobs:
 
     - name: Create lightweight tag that points "production" at the Commit Hash
       run: |
-        git tag -f production ${{ steps.hash.outputs.COMMIT_HASH }} && git push -f origin production
+        git tag -f production ${{ steps.hash.outputs.COMMIT_HASH }}
+        git push -f origin production
