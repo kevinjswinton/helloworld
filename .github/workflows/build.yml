@@ -2,8 +2,7 @@
 
 ---
 
-name: Build
-
+name: build
 on:
   push:
     branches:
@@ -11,7 +10,7 @@ on:
 
 jobs:
 
-  build-image:
+  build_release_candidate:
 
     name:        Build Container Image
     runs-on:     ubuntu-latest

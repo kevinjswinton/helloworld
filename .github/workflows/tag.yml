@@ -2,8 +2,7 @@
 
 ---
 
-name: Tag
-
+name: tag
 on:
   push:
     tags:
@@ -11,7 +10,7 @@ on:
 
 jobs:
 
-  push_to_registry:
+  tag_release_candidate:
 
     name:        Push Docker image to Docker Hub
     runs-on:     ubuntu-latest
