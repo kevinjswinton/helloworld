@@ -37,5 +37,6 @@ jobs:
 
       - name: set_tag
         id:   set_tag
-        run:  git tag  -f        production ${{ steps.find_commit_hash.outputs.COMMIT_HASH }}
+        run:  |
+              git tag  -f        production ${{ steps.find_commit_hash.outputs.COMMIT_HASH }}
               git push -f origin production
