@@ -25,15 +25,18 @@ jobs:
 
       - name: fetch_tags
         id:   fetch_tags
-        run:  git fetch --tags --force
+        run:  |
+              git fetch --tags --force
 
       - name: display_tag_name
         id:   display_tag_name
-        run:  echo "${{ github.ref_name }}"
+        run:  |
+              echo "${{ github.ref_name }}"
 
       - name: find_commit_hash
         id:   find_commit_hash
-        run:  echo "COMMIT_HASH=$(git rev-list -n 1 ${{ github.ref_name }} | cut -c1-7)" >> $GITHUB_OUTPUT
+        run:  |
+              echo "COMMIT_HASH=$(git rev-list -n 1 ${{ github.ref_name }} | cut -c1-7)" >> $GITHUB_OUTPUT
 
       - name: set_tag
         id:   set_tag
