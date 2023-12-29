@@ -28,11 +28,6 @@ jobs:
         run:  |
               git fetch --tags --force
 
-      - name: display_tag_name
-        id:   display_tag_name
-        run:  |
-              echo "${{ github.ref_name }}"
-
       - name: find_commit_hash
         id:   find_commit_hash
         run:  |
